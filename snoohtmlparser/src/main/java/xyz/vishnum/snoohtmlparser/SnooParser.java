@@ -2,7 +2,6 @@ package xyz.vishnum.snoohtmlparser;
 
 import android.text.Spannable;
 import android.text.Spanned;
-import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 import net.nightwhistler.htmlspanner.HtmlSpanner;
@@ -33,7 +32,6 @@ import xyz.vishnum.snoohtmlparser.handlers.StrikethroughHandler;
 
 public class SnooParser {
     private static final String TAG = SnooParser.class.getSimpleName();
-    private static final boolean DEBUG = false;
     private HtmlSpanner spanner;
 
     public SnooParser() {
@@ -46,8 +44,10 @@ public class SnooParser {
 
     /**
      * Replace the default handler for a tag with a custom handler that extends TagNodeHandler
+     *
      * @param tag An HTML tag
-     * @param handler A handler that decides how the specified tag is formatted */
+     * @param handler A handler that decides how the specified tag is formatted
+     */
     public void replaceHandler(String tag, TagNodeHandler handler) {
         spanner.unregisterHandler(tag);
         spanner.registerHandler(tag, handler);
@@ -55,10 +55,10 @@ public class SnooParser {
 
     /**
      * @param escapedHtml The body HTML from a Reddit comment or self-text
-     * @return Returns a list of RedditBlock items that can be parsed and put into views */
+     * @return Returns a list of RedditBlock items that can be parsed and put into views
+     */
     public List<RedditBlock> getBlocks(String escapedHtml) {
         String unescapedHtml = Parser.unescapeEntities(escapedHtml, false);
-        Log.d(TAG, unescapedHtml);
         Document document = Jsoup.parseBodyFragment(unescapedHtml);
 
         String buffer = "";
@@ -67,7 +67,6 @@ public class SnooParser {
         for (int i = 0; i < children.size(); i++) {
             Element child = children.get(i);
             if (child.tagName().equalsIgnoreCase("pre")) {
-                if (DEBUG) Log.d(TAG, "Pre:     " + child.outerHtml());
                 // Ran into codeblock
                 // Add buffer to blocks
                 if (!buffer.isEmpty()) blocks.add(new TextBlock(parse(buffer)));
@@ -75,7 +74,6 @@ public class SnooParser {
                 // Add codeblock to blocks
                 blocks.add(new CodeBlock(parse(child.outerHtml())));
             } else if (child.tagName().equalsIgnoreCase("table")) {
-                if (DEBUG) Log.d(TAG, "Table:   " + child.outerHtml());
                 // Ran into table
                 // Add buffer to blocks
                 if (!buffer.isEmpty()) blocks.add(new TextBlock(parse(buffer)));
@@ -83,7 +81,6 @@ public class SnooParser {
                 // Add table to blocks
                 blocks.add(formatTableBlock(child));
             } else if (child.tagName().equalsIgnoreCase("hr")) {
-                if (DEBUG) Log.d(TAG, "HR:     " + child.outerHtml());
                 // Ran into horizontal rule
                 // Add buffer to blocks
                 if (!buffer.isEmpty()) blocks.add(new TextBlock(parse(buffer)));
@@ -91,13 +88,11 @@ public class SnooParser {
                 // Add hr block to blocks
                 blocks.add(new HrBlock());
             } else if (i == children.size() - 1) {
-                if (DEBUG) Log.d(TAG, "Last:    " + child.outerHtml());
                 // Last element in div (Not table or pre)
                 // Add buffer to blocks
                 buffer = buffer.concat(child.outerHtml());
                 blocks.add(new TextBlock(parse(buffer)));
             } else {
-                if (DEBUG) Log.d(TAG, "Element: " + child.outerHtml());
                 // Add element to buffer
                 buffer = buffer.concat(child.outerHtml());
             }
