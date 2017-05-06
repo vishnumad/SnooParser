@@ -33,7 +33,7 @@ import xyz.vishnum.snoohtmlparser.handlers.StrikethroughHandler;
 
 public class SnooParser {
     private static final String TAG = SnooParser.class.getSimpleName();
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
     private HtmlSpanner spanner;
 
     public SnooParser() {
