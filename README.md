@@ -1,12 +1,11 @@
-# SnooParser
-[![](https://jitpack.io/v/vishnumad/SnooParser.svg)](https://jitpack.io/#vishnumad/SnooParser)
+# SnooParser - Reddit HTML Parser
 
 ## Add to Gradle
 Add the following to your app build.gradle file and sync.
 ```
 dependencies {
   ...
-  compile 'com.github.vishnumad:SnooParser:9f766b44d5'
+  compile 'com.github.vishnumad:SnooParser:LATEST-COMMIT-HASH'
 }
 ```
 ```
