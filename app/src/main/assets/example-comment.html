@@ -1,0 +1,507 @@
+<!-- Comment by /u/AnteChronos
+     Url: https://www.reddit.com/r/reddit.com/comments/6ewgt/reddit_markdown_primer_or_how_do_you_do_all_that/c03nik6/ -->
+<div class="md">
+    <p><em>Note: For a full list of markdown syntax, see the
+        <a href="http://daringfireball.net/projects/markdown/syntax">official syntax guide</a>. Also
+        note that reddit doesn&#39;t support images, for which I am grateful, as that would most
+        definitely be the catalyst needed to turn reddit into 4chan
+        (</em><code>/r/circlejerk/</code><em>, which uses CSS trickery to permit some level of image
+        posting, is a great example of the destructive power of images).</em>
+    </p>
+
+    <h1>PARAGRAPHS</h1>
+
+    <p>Paragraphs are delimited by a blank line. Simply starting text on a new line won&#39;t create
+        a new paragraph; It will remain on the same line in the final, rendered version as the
+        previous line. You need an extra, blank line to start a new paragraph.
+        This is especially important when dealing with quotes and, to a lesser degree, lists.</p>
+
+    <p>You can also add non-paragraph line breaks by ending a line with two spaces. The difference
+        is subtle:</p>
+
+    <p>Paragraph 1, Line 1
+        <br/> Paragraph 1, Line 2 </p>
+
+    <p>Paragraph 2</p>
+
+    <hr/>
+
+    <h1>FONT FORMATTING</h1>
+
+    <h3>Italics</h3>
+
+    <p>Text can be displayed in an italic font by surrounding a word or words with either single
+        asterisks (*) or single underscores (_).</p>
+
+    <p>For example: </p>
+
+    <blockquote>
+        <p>This sentence includes *italic text*.</p>
+    </blockquote>
+
+    <p>is displayed as:</p>
+
+    <blockquote>
+        <p>This sentence includes <em>italic text</em>.</p>
+    </blockquote>
+
+    <h3>Bold</h3>
+
+    <p>Text can be displayed in a bold font by surrounding a word or words with either double
+        asterisks (*) or double underscores (_).</p>
+
+    <p>For example: </p>
+
+    <blockquote>
+        <p>This sentence includes **bold text**.</p>
+    </blockquote>
+
+    <p>is displayed as:</p>
+
+    <blockquote>
+        <p>This sentence includes <strong>bold text</strong>.</p>
+    </blockquote>
+
+    <h3>Strikethrough</h3>
+
+    <p>Text can be displayed in a strikethrough font by surrounding a word or words with double
+        tildes (~~). For example:</p>
+
+    <blockquote>
+        <p>This sentence includes ~ ~strikethrough text~ ~ </p>
+
+        <p><em>(but with no spaces between the tildes; escape sequences [see far below] appear not
+            to work with tildes, so I can&#39;t demonstrate the exact usage).</em>
+        </p>
+    </blockquote>
+
+    <p>is displayed as:</p>
+
+    <blockquote>
+        <p>This sentence includes
+            <del>strikethrough text</del>
+            .
+        </p>
+    </blockquote>
+
+    <h3>Superscript</h3>
+
+    <p>Text can be displayed in a superscript font by preceding it with a caret ( ^ ). </p>
+
+    <blockquote>
+        <p>This sentence includes super^ script </p>
+
+        <p><em>(but with no spaces after the caret; Like strikethrough, the superscript syntax doesn&#39;t
+            play nicely with escape sequences).</em>
+        </p>
+    </blockquote>
+
+    <p>is displayed as:</p>
+
+    <blockquote>
+        <p>This sentence includes super<sup>script.</sup>
+        </p>
+    </blockquote>
+
+    <p>Superscripts can even be nested: just<sup>like<sup>this</sup></sup> .</p>
+
+    <p>However, note that the superscript font will be reset by a space. To get around this, you can
+        enclose the text in the superscript with parentheses. The parentheses won&#39;t be displayed
+        in the comment, and everything inside of them will be superscripted,
+        regardless of spaces:</p>
+
+    <blockquote>
+        <p>This sentence^ (has a superscript with multiple words)</p>
+
+        <p><em>Once again, with no space after the caret.</em>
+        </p>
+    </blockquote>
+
+    <p>is displayed as</p>
+
+    <blockquote>
+        <p>This sentence<sup>has a superscript with multiple words</sup>
+        </p>
+    </blockquote>
+
+    <h3>Headers</h3>
+
+    <p>Markdown supports 6 levels of headers (some of which don&#39;t actually display as headers in
+        reddit):</p>
+
+    <h1>Header 1</h1>
+
+    <h2>Header 2</h2>
+
+    <h3>Header 3</h3>
+
+    <h4>Header 4</h4>
+
+    <h5>Header 5</h5>
+
+    <h6>Header 6</h6>
+
+    <p>...which can be created in a couple of different ways. Level 1 and 2 headers can be created
+        by adding a line of equals signs (=) or dashes (-), respectively, underneath the header
+        text. </p>
+
+    <p>However, <em>all</em> types of headers can be created with a second method. Simply prepend a
+        number of hashes (#) corresponding to the header level you want, so:</p>
+
+    <blockquote>
+        <p># Header 1</p>
+
+        <p>## Header 2</p>
+
+        <p>### Header 3</p>
+
+        <p>#### Header 4</p>
+
+        <p>##### Header 5</p>
+
+        <p>###### Header 6</p>
+    </blockquote>
+
+    <p>results in:</p>
+
+    <blockquote>
+        <h1>Header 1</h1>
+
+        <h2>Header 2</h2>
+
+        <h3>Header 3</h3>
+
+        <h4>Header 4</h4>
+
+        <h5>Header 5</h5>
+
+        <h6>Header 6</h6>
+    </blockquote>
+
+    <p>Note: you can add hashes after the header text to balance out how the source code looks
+        without affecting what is displayed. So:</p>
+
+    <blockquote>
+        <p>## Header 2 ##</p>
+    </blockquote>
+
+    <p>also produces:</p>
+
+    <blockquote>
+        <h2>Header 2</h2>
+    </blockquote>
+
+    <hr/>
+
+    <h1>LISTS</h1>
+
+    <p>Markdown supports two types of lists: ordered and unordered.</p>
+
+    <h3>Unordered Lists</h3>
+
+    <p>Prepend each element in the list with either a plus (+), dash (-), or asterisk (*) plus a
+        space. Line openers can be mixed. So</p>
+
+    <blockquote>
+        <p>* Item 1</p>
+
+        <p>+ Item 2</p>
+
+        <p>- Item 3</p>
+    </blockquote>
+
+    <p>results in</p>
+
+    <blockquote>
+        <ul>
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+        </ul>
+    </blockquote>
+
+    <h3>Ordered Lists</h3>
+
+    <p>Ordered lists work roughly the same way, but you prepend each item in the list with a number
+        plus a period (.) plus a space. Also, it makes no difference what numbers you use. The
+        ordered list will always start with the number 1, and will always increment
+        sequentially. So</p>
+
+    <blockquote>
+        <p>7. Item 1</p>
+
+        <p>2. Item 2</p>
+
+        <p>5. Item 3</p>
+    </blockquote>
+
+    <p>results in</p>
+
+    <blockquote>
+        <ol>
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+        </ol>
+    </blockquote>
+
+    <p>Also, you can nest lists, like so:</p>
+
+    <ol>
+        <li>
+            <p>Ordered list item 1</p>
+        </li>
+        <li>
+            <ul>
+                <li>Bullet 1 in list item 2</li>
+            </ul>
+
+            <ul>
+                <li>Bullet 2 in list item 2</li>
+            </ul>
+        </li>
+        <li>
+            <p>List item 3</p>
+        </li>
+    </ol>
+
+    <p>Note: If your list items consist of multiple paragraphs, you can force each new paragraph to
+        remain in the previous list item by indenting it by one tab or four spaces. So</p>
+
+    <blockquote>
+        <p>* This item has multiple paragraphs.</p>
+
+        <p>(<em>four spaces here</em>)This is the second paragraph</p>
+
+        <p>* Item 2</p>
+    </blockquote>
+
+    <p>results in:</p>
+
+    <blockquote>
+        <ul>
+            <li>
+                <p>This item has multiple paragraphs.</p>
+
+                <p>This is the second paragraph</p>
+            </li>
+            <li>
+                <p>Item 2</p>
+            </li>
+        </ul>
+    </blockquote>
+
+    <p>Notice how the spaces in my source were stripped out? What if you need to preserve
+        formatting? That brings us to:</p>
+
+    <hr/>
+
+    <h1>CODE BLOCKS AND INLINE CODE</h1>
+
+    <p>Inline code is easy. Simply surround any text with backticks (`), <strong>not to be confused
+        with apostrophes (&#39;)</strong>. Anything between the backticks will be rendered in a
+        fixed-width font, and none of the formatting syntax we&#39;re exploring
+        will be applied. So</p>
+
+    <blockquote>
+        <p>Here is some <code>`</code>inline code with **formatting**<code>`</code>
+        </p>
+    </blockquote>
+
+    <p>is displayed as:</p>
+
+    <blockquote>
+        <p>Here is some <code>inline code with **formatting**</code>
+        </p>
+    </blockquote>
+
+    <p>Note that this is why you should use the normal apostrophe when typing out possessive nouns
+        or contractions. Otherwise you may end up with something like:</p>
+
+    <blockquote>
+        <p>I couldn<code>t believe that he didn</code>t know that!</p>
+    </blockquote>
+
+    <p>Sometimes you need to preserve indentation, too. In those cases, you can create a block code
+        element by starting every line of your code with four spaces (followed by other spaces that
+        will be preserved). You can get results like the following:</p>
+
+    <pre><code>public void main(Strings argv[]){
+    System.out.println(&quot;Hello world!&quot;);
+}
+</code></pre>
+
+    <hr/>
+
+    <h1>LINKS</h1>
+
+    <p>There are a couple of ways to get HTML links. The easiest is to just paste a valid URL, which
+        will be automatically parsed as a link. Like so:</p>
+
+    <blockquote>
+        <p><a href="http://en.wikipedia.org">http://en.wikipedia.org</a>
+        </p>
+    </blockquote>
+
+    <p>However, usually you&#39;ll want to have text that functions as a link. In that case, include
+        the text inside of square brackets followed by the URL in parentheses. So:</p>
+
+    <blockquote>
+        <p>[Wikipedia](<a href="http://en.wikipedia.org">http://en.wikipedia.org</a>).</p>
+    </blockquote>
+
+    <p>results in:</p>
+
+    <blockquote>
+        <p><a href="http://en.wikipedia.org">Wikipedia</a>.</p>
+    </blockquote>
+
+    <p>You can also provide tooltip text for links like so:</p>
+
+    <blockquote>
+        <p>[Wikipedia](<a href="http://en.wikipedia.org">http://en.wikipedia.org</a> &quot;tooltip
+            text&quot;).</p>
+    </blockquote>
+
+    <p>results in:</p>
+
+    <blockquote>
+        <p><a href="http://en.wikipedia.org"
+              title="tooltip text">Wikipedia</a>.</p>
+    </blockquote>
+
+    <p>There are other methods of generating links that aren&#39;t appropriate for discussion-board
+        style comments. See the <a href="http://daringfireball.net/projects/markdown/syntax#link">Markdown
+            Syntax</a> if you&#39;re interested in more info.</p>
+
+    <hr/>
+
+    <h1>BLOCK QUOTES</h1>
+
+    <p>You&#39;ll probably do a lot of quoting of other redditors. In those cases, you&#39;ll want
+        to use block quotes. Simple begin each line you want quoted with a right angle bracket (&gt;).
+        Multiple angle brackets can be used for nested quotes. To cause
+        a new paragraph to be quoted, begin that paragraph with another angle bracket. So the
+        following:</p>
+
+    <pre><code>&gt;Here&#39;s a quote.
+
+&gt;Another paragraph in the same quote.
+&gt;&gt;A nested quote.
+
+&gt;Back to a single quote.
+
+And finally some unquoted text.
+</code></pre>
+
+    <p>Is displayed as:</p>
+
+    <blockquote>
+        <p>Here&#39;s a quote.</p>
+
+        <p>Another paragraph in the same quote.</p>
+
+        <blockquote>
+            <p>A nested quote.</p>
+        </blockquote>
+
+        <p>Back to a single quote.</p>
+    </blockquote>
+
+    <p>And finally some unquoted text.</p>
+
+    <hr/>
+
+    <h1>MISCELLANEOUS</h1>
+
+    <h3>Tables</h3>
+
+    <p>Reddit has the ability to represent tabular data in fancy-looking tables. For example:</p>
+
+    <table>
+        <thead>
+        <tr>
+            <th align="left">some</th>
+            <th align="center">header</th>
+            <th align="right">labels</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td align="left">Left-justified</td>
+            <td align="center">center-justified</td>
+            <td align="right">right-justified</td>
+        </tr>
+        <tr>
+            <td align="left">a</td>
+            <td align="center">b</td>
+            <td align="right">c</td>
+        </tr>
+        <tr>
+            <td align="left">d</td>
+            <td align="center">e</td>
+            <td align="right">f</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p>Which is produced with the following markdown:</p>
+
+    <blockquote>
+        <p><code>some|header|labels</code>
+            <br/>
+            <code>:---|:--:|---:</code>
+            <br/>
+            <code>Left-justified|center-justified|right-justified</code>
+            <br/>
+            <code>a|b|c</code>
+            <br/>
+            <code>d|e|f</code>
+        </p>
+    </blockquote>
+
+    <p>All you need to produce a table is a row of headers separated by &quot;pipes&quot;
+        (<strong>|</strong>), a row indicating how to justify the columns, and 1 or more rows of
+        data (again, pipe-separated).</p>
+
+    <p>The only real &quot;magic&quot; is in the row between the headers and the data. It should
+        ideally be formed with rows dashes separated by pipes. If you add a colon to the left of the
+        dashes for a column, that column will be left-justified. To the right
+        for right justification, and on both sides for centered data. If there&#39;s no colon, it
+        defaults to left-justified.</p>
+
+    <p>Any number of dashes will do, even just one. You can use none at all if you want it to
+        default to left-justified, but it&#39;s just easier to see what you&#39;re doing if you put
+        a few in there.</p>
+
+    <p>Also note that the pipes (signifying the dividing line between cells) don&#39;t have to line
+        up. You just need the same number of them in every row.</p>
+
+    <h3>Escaping special characters</h3>
+
+    <p>If you need to display any of the special characters, you can escape that character with a
+        backslash (\). For example:</p>
+
+    <blockquote>
+        <p>Escaped \*italics\*</p>
+    </blockquote>
+
+    <p>results in:</p>
+
+    <blockquote>
+        <p>Escaped *italics*</p>
+    </blockquote>
+
+    <h3>Horizontal rules</h3>
+
+    <p>Finally, to create a horizontal rule, create a separate paragraph with 5 or more asterisks
+        (*).</p>
+
+    <blockquote>
+        <p>*****</p>
+    </blockquote>
+
+    <p>results in</p>
+
+    <hr/>
+</div>
