@@ -1,7 +1,10 @@
 # SnooParser - Reddit HTML Parser
 
 ## Add to Gradle
-Add the following to your app build.gradle file and sync.
+Add the following to your app build.gradle file and sync. 
+
+[Jitpack Instructions](https://jitpack.io/#vishnumad/SnooParser/)
+
 ```groovy
 dependencies {
   ...
