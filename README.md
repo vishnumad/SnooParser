@@ -2,13 +2,13 @@
 
 ## Add to Gradle
 Add the following to your app build.gradle file and sync.
-```
+```groovy
 dependencies {
   ...
   compile 'com.github.vishnumad:SnooParser:LATEST-COMMIT-HASH'
 }
 ```
-```
+```groovy
 repositories {
   maven { url 'https://jitpack.io' }
 }
@@ -17,7 +17,7 @@ repositories {
 ## Usage
 
 ### XML
-```
+```xml
 <xyz.vishnum.snoohtmlparser.SnooView
             android:id="@+id/snoo_body_view"
             android:padding="16dp"
@@ -30,7 +30,8 @@ See [example](app/src/main/res/layout/activity_example.xml)
 ### Java
 
 #### Basic usage
-```
+
+```java
 SnooView snooView = (SnooView) findViewById(R.id.snoo_body_view);
 SnooParser parser = new SnooParser();
 
@@ -41,7 +42,8 @@ snooView.setBlocks(blocks);
 ```
 
 **Handling link clicks** — Defaults to open in browser, but you can add your own listener
-```
+
+```java
 snooView.setOnUrlClickListener(new SnooView.OnUrlClickListener() {
     @Override
     public void onClick(String url) {
@@ -51,14 +53,16 @@ snooView.setOnUrlClickListener(new SnooView.OnUrlClickListener() {
 ```
 
 **Custom tag handling** — `<pre>`, `<hr/>`, and `<table>` tags will not be affected
-```
+
+```java
 SnooParser parser = new SnooParser();
 
 // Override how the <strong> tag is handled
 // All bold text with the strong tag will be displayed as blue colored text
 parser.replaceHandler("strong", new ExampleStrongHandler());
 ```
-```
+
+```java
 public class ExampleStrongHandler extends TagNodeHandler {
     @Override
     public void handleTagNode(TagNode node, SpannableStringBuilder builder, int start, int end) {
