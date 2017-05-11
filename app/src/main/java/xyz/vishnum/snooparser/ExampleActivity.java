@@ -41,7 +41,7 @@ public class ExampleActivity extends AppCompatActivity {
 
     private String getCommentHtml() {
         try {
-            InputStream inputStream = getAssets().open("example-comment.html");
+            InputStream inputStream = getAssets().open("example-comment-2.html");
             byte[] buffer = new byte[inputStream.available()];
             inputStream.read(buffer);
             inputStream.close();

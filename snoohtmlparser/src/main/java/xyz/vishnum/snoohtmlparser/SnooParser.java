@@ -72,7 +72,7 @@ public class SnooParser {
                 if (!buffer.isEmpty()) blocks.add(new TextBlock(parse(buffer)));
                 buffer = "";
                 // Add codeblock to blocks
-                blocks.add(new CodeBlock(parse(child.outerHtml())));
+                blocks.add(new CodeBlock(parse(child.outerHtml(), true)));
             } else if (child.tagName().equalsIgnoreCase("table")) {
                 // Ran into table
                 // Add buffer to blocks
@@ -103,6 +103,15 @@ public class SnooParser {
     private Spannable parse(String bufferHtml) {
         Spanned spanned = spanner.fromHtml(bufferHtml);
         return (Spannable) spanned.subSequence(0, spanned.length() - 2);
+    }
+
+    private Spannable parse(String bufferHtml, boolean removeWhitespace) {
+        if (removeWhitespace) {
+            Spanned spanned = spanner.fromHtml(bufferHtml);
+            return (Spannable) spanned.subSequence(0, spanned.length() - 3);
+        } else {
+            return parse(bufferHtml);
+        }
     }
 
     private TableBlock formatTableBlock(Element table) {

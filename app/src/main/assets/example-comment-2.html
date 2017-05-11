@@ -1,0 +1,417 @@
+<div class="md"><p><strong>Text Formatting</strong></p>
+
+    <p>&nbsp;</p>
+
+    <h1>Header 1</h1>
+
+    <h2>Header 2</h2>
+
+    <h3>Header 3</h3>
+
+    <h4>Header 4</h4>
+
+    <h5>Header 5</h5>
+
+    <h6>Header 6</h6>
+
+    <p>&nbsp;</p>
+
+    <p><strong>Bold text</strong></p>
+
+    <p><em>Italicized text</em></p>
+
+    <p><strong><em>Bold and italicized text</em></strong></p>
+
+    <p>
+        <del>Strikethrough text</del>
+    </p>
+
+    <p>Superscript<sup>text</sup></p>
+
+    <p><a href="http://www.google.com"
+          rel="nofollow">Link text</a></p>
+
+    <p>&nbsp;</p>
+
+    <blockquote>
+        <p>Quote text</p>
+
+        <blockquote>
+            <p>Nested quote text</p>
+
+            <blockquote>
+                <p>Nested quote text (3)</p>
+            </blockquote>
+        </blockquote>
+    </blockquote>
+
+    <p>&nbsp;</p>
+
+    <p>Code <code>inside of</code> a sentence. </p>
+
+    <p>&nbsp;</p>
+
+    <pre><code>// Code in a regular code block
+String loginCurrentUser() throws OAuthException {
+    String token = getToken();
+    if (token == null) {
+        doUserlessLogin();
+        return &quot;Guest&quot;;
+    } else {
+        doLogin(token);
+        return username;
+    }
+}
+</code></pre>
+
+    <hr/>
+
+    <p><strong>Lists</strong></p>
+
+    <p>&nbsp;</p>
+
+    <p>Numbered list:</p>
+
+    <ol>
+        <li>Item one</li>
+        <li>Item two</li>
+        <li>Item three</li>
+    </ol>
+
+    <p>&nbsp;</p>
+
+    <p>Unordered list:</p>
+
+    <ul>
+        <li>Item one</li>
+        <li>Item two</li>
+        <li>Item three</li>
+    </ul>
+
+    <p>&nbsp;</p>
+
+    <p>Nested list:</p>
+
+    <ol>
+        <li>Item one
+
+            <ul>
+                <li>Nested item one</li>
+                <li>Nested item two</li>
+            </ul>
+        </li>
+        <li>Item two</li>
+        <li>Item three</li>
+    </ol>
+
+    <p>&nbsp;</p>
+
+    <ul>
+        <li>Item one
+
+            <ol>
+                <li>Nested item one</li>
+                <li>Nested item two</li>
+            </ol>
+        </li>
+        <li>Item two</li>
+        <li>Item three</li>
+    </ul>
+
+    <hr/>
+
+    <p><strong>Tables</strong></p>
+
+    <p>&nbsp;</p>
+
+    <p>Small simple table:</p>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Header 1</th>
+            <th>Header 2</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Foo</td>
+            <td>Bar</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p>&nbsp;</p>
+
+    <p>Large table:</p>
+
+    <table>
+        <thead>
+        <tr>
+            <th align="left">Season</th>
+            <th align="right">Age</th>
+            <th align="left">Tm</th>
+            <th align="left">Lg</th>
+            <th align="left">Pos</th>
+            <th align="right">G</th>
+            <th align="right">GS</th>
+            <th align="right">MP</th>
+            <th align="right">FG</th>
+            <th align="right">FGA</th>
+            <th align="right">FG%</th>
+            <th align="right">3P</th>
+            <th align="right">3PA</th>
+            <th align="right">3P%</th>
+            <th align="right">2P</th>
+            <th align="right">2PA</th>
+            <th align="right">2P%</th>
+            <th align="right">eFG%</th>
+            <th align="right">FT</th>
+            <th align="right">FTA</th>
+            <th align="right">FT%</th>
+            <th align="right">ORB</th>
+            <th align="right">DRB</th>
+            <th align="right">TRB</th>
+            <th align="right">AST</th>
+            <th align="right">STL</th>
+            <th align="right">BLK</th>
+            <th align="right">TOV</th>
+            <th align="right">PF</th>
+            <th align="right">PTS</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td align="left">2011-12</td>
+            <td align="right">21</td>
+            <td align="left">MIN</td>
+            <td align="left">NBA</td>
+            <td align="left">PG</td>
+            <td align="right">41</td>
+            <td align="right">31</td>
+            <td align="right">34.2</td>
+            <td align="right">3.4</td>
+            <td align="right">9.5</td>
+            <td align="right">.357</td>
+            <td align="right">0.8</td>
+            <td align="right">2.3</td>
+            <td align="right">.340</td>
+            <td align="right">2.6</td>
+            <td align="right">7.2</td>
+            <td align="right">.363</td>
+            <td align="right">.398</td>
+            <td align="right">3.1</td>
+            <td align="right">3.8</td>
+            <td align="right">.803</td>
+            <td align="right">0.5</td>
+            <td align="right">3.7</td>
+            <td align="right">4.2</td>
+            <td align="right">8.2</td>
+            <td align="right">2.2</td>
+            <td align="right">0.2</td>
+            <td align="right">3.2</td>
+            <td align="right">2.4</td>
+            <td align="right">10.6</td>
+        </tr>
+        <tr>
+            <td align="left">2012-13</td>
+            <td align="right">22</td>
+            <td align="left">MIN</td>
+            <td align="left">NBA</td>
+            <td align="left">PG</td>
+            <td align="right">57</td>
+            <td align="right">47</td>
+            <td align="right">29.7</td>
+            <td align="right">3.2</td>
+            <td align="right">9.0</td>
+            <td align="right">.360</td>
+            <td align="right">0.5</td>
+            <td align="right">1.6</td>
+            <td align="right">.293</td>
+            <td align="right">2.8</td>
+            <td align="right">7.4</td>
+            <td align="right">.374</td>
+            <td align="right">.386</td>
+            <td align="right">3.7</td>
+            <td align="right">4.6</td>
+            <td align="right">.799</td>
+            <td align="right">0.8</td>
+            <td align="right">3.2</td>
+            <td align="right">4.0</td>
+            <td align="right">7.3</td>
+            <td align="right">2.4</td>
+            <td align="right">0.1</td>
+            <td align="right">3.0</td>
+            <td align="right">2.5</td>
+            <td align="right">10.7</td>
+        </tr>
+        <tr>
+            <td align="left">2013-14</td>
+            <td align="right">23</td>
+            <td align="left">MIN</td>
+            <td align="left">NBA</td>
+            <td align="left">PG</td>
+            <td align="right">82</td>
+            <td align="right">82</td>
+            <td align="right">32.2</td>
+            <td align="right">3.1</td>
+            <td align="right">8.2</td>
+            <td align="right">.381</td>
+            <td align="right">0.5</td>
+            <td align="right">1.6</td>
+            <td align="right">.331</td>
+            <td align="right">2.6</td>
+            <td align="right">6.5</td>
+            <td align="right">.393</td>
+            <td align="right">.413</td>
+            <td align="right">2.8</td>
+            <td align="right">3.5</td>
+            <td align="right">.802</td>
+            <td align="right">0.7</td>
+            <td align="right">3.4</td>
+            <td align="right">4.2</td>
+            <td align="right">8.6</td>
+            <td align="right">2.3</td>
+            <td align="right">0.1</td>
+            <td align="right">2.7</td>
+            <td align="right">2.7</td>
+            <td align="right">9.5</td>
+        </tr>
+        <tr>
+            <td align="left">2014-15</td>
+            <td align="right">24</td>
+            <td align="left">MIN</td>
+            <td align="left">NBA</td>
+            <td align="left">PG</td>
+            <td align="right">22</td>
+            <td align="right">22</td>
+            <td align="right">31.5</td>
+            <td align="right">3.5</td>
+            <td align="right">10.0</td>
+            <td align="right">.356</td>
+            <td align="right">0.6</td>
+            <td align="right">2.3</td>
+            <td align="right">.255</td>
+            <td align="right">3.0</td>
+            <td align="right">7.6</td>
+            <td align="right">.387</td>
+            <td align="right">.386</td>
+            <td align="right">2.6</td>
+            <td align="right">3.2</td>
+            <td align="right">.803</td>
+            <td align="right">0.9</td>
+            <td align="right">4.8</td>
+            <td align="right">5.7</td>
+            <td align="right">8.8</td>
+            <td align="right">1.7</td>
+            <td align="right">0.0</td>
+            <td align="right">2.9</td>
+            <td align="right">2.7</td>
+            <td align="right">10.3</td>
+        </tr>
+        <tr>
+            <td align="left">2015-16</td>
+            <td align="right">25</td>
+            <td align="left">MIN</td>
+            <td align="left">NBA</td>
+            <td align="left">PG</td>
+            <td align="right">76</td>
+            <td align="right">76</td>
+            <td align="right">30.6</td>
+            <td align="right">2.9</td>
+            <td align="right">7.7</td>
+            <td align="right">.374</td>
+            <td align="right">0.8</td>
+            <td align="right">2.5</td>
+            <td align="right">.326</td>
+            <td align="right">2.1</td>
+            <td align="right">5.2</td>
+            <td align="right">.396</td>
+            <td align="right">.427</td>
+            <td align="right">3.5</td>
+            <td align="right">4.1</td>
+            <td align="right">.847</td>
+            <td align="right">0.5</td>
+            <td align="right">3.8</td>
+            <td align="right">4.3</td>
+            <td align="right">8.7</td>
+            <td align="right">2.1</td>
+            <td align="right">0.1</td>
+            <td align="right">2.5</td>
+            <td align="right">2.6</td>
+            <td align="right">10.1</td>
+        </tr>
+        <tr>
+            <td align="left">2016-17</td>
+            <td align="right">26</td>
+            <td align="left">MIN</td>
+            <td align="left">NBA</td>
+            <td align="left">PG</td>
+            <td align="right">62</td>
+            <td align="right">62</td>
+            <td align="right">32.4</td>
+            <td align="right">3.2</td>
+            <td align="right">7.8</td>
+            <td align="right">.411</td>
+            <td align="right">0.8</td>
+            <td align="right">2.5</td>
+            <td align="right">.308</td>
+            <td align="right">2.4</td>
+            <td align="right">5.3</td>
+            <td align="right">.460</td>
+            <td align="right">.461</td>
+            <td align="right">3.0</td>
+            <td align="right">3.4</td>
+            <td align="right">.873</td>
+            <td align="right">0.9</td>
+            <td align="right">3.0</td>
+            <td align="right">3.9</td>
+            <td align="right">8.9</td>
+            <td align="right">1.8</td>
+            <td align="right">0.1</td>
+            <td align="right">2.5</td>
+            <td align="right">2.7</td>
+            <td align="right">10.2</td>
+        </tr>
+        <tr>
+            <td align="left">Career</td>
+            <td align="right"></td>
+            <td align="left"></td>
+            <td align="left">NBA</td>
+            <td align="left"></td>
+            <td align="right">340</td>
+            <td align="right">320</td>
+            <td align="right">31.6</td>
+            <td align="right">3.2</td>
+            <td align="right">8.4</td>
+            <td align="right">.376</td>
+            <td align="right">0.7</td>
+            <td align="right">2.1</td>
+            <td align="right">.316</td>
+            <td align="right">2.5</td>
+            <td align="right">6.3</td>
+            <td align="right">.396</td>
+            <td align="right">.415</td>
+            <td align="right">3.2</td>
+            <td align="right">3.8</td>
+            <td align="right">.824</td>
+            <td align="right">0.7</td>
+            <td align="right">3.5</td>
+            <td align="right">4.2</td>
+            <td align="right">8.4</td>
+            <td align="right">2.1</td>
+            <td align="right">0.1</td>
+            <td align="right">2.8</td>
+            <td align="right">2.6</td>
+            <td align="right">10.1</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p>Provided by
+        <a href="http://www.sports-reference.com/sharing.html?utm_source=direct&amp;utm_medium=Share&amp;utm_campaign=ShareTool"
+           rel="nofollow">Basketball-Reference.com</a>:
+        <a href="http://www.basketball-reference.com/players/r/rubiori01.html?sr&amp;utm_source=direct&amp;utm_medium=Share&amp;utm_campaign=ShareTool#per_game"
+           rel="nofollow">View Original Table</a>
+        Generated 3/18/2017.</p>
+</div>
