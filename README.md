@@ -79,3 +79,10 @@ See full [example](app/src/main/java/xyz/vishnum/snooparser/ExampleActivity.java
 
 # External dependencies
 This project depends on the [JSoup](https://jsoup.org/download) and [HtmlSpanner](https://github.com/NightWhistler/HtmlSpanner) libraries
+
+# Todo
+* Whitespace (padding/margins) around codeblocks and tables
+* Background color for code block
+* Color for HR block
+* Table outlines
+* Table column alignments
