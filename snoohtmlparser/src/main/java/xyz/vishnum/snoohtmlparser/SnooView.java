@@ -14,6 +14,7 @@ import android.text.style.ClickableSpan;
 import android.text.style.URLSpan;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
@@ -36,10 +37,25 @@ import xyz.vishnum.snoohtmlparser.blocks.TextBlock;
 public class SnooView extends LinearLayout {
     private static final String TAG = SnooView.class.getSimpleName();
     private static final LayoutParams HR_PARAMS;
+    private static final LayoutParams TEXT_PARAMS_MIDDLE;
+    private static final LayoutParams TEXT_PARAMS_TOP;
+    private static final LayoutParams TEXT_PARAMS_BOTTOM;
 
     static {
         HR_PARAMS = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 4 /*px*/);
         HR_PARAMS.setMargins(0, 32, 0, 32);
+
+        TEXT_PARAMS_TOP = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        TEXT_PARAMS_TOP.setMargins(0, 0, 0, 32);
+
+        TEXT_PARAMS_BOTTOM = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        TEXT_PARAMS_BOTTOM.setMargins(0, 32, 0, 0);
+
+        TEXT_PARAMS_MIDDLE = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        TEXT_PARAMS_MIDDLE.setMargins(0, 32, 0, 32);
     }
 
     private OnUrlClickListener urlClickListener = null;
@@ -71,7 +87,8 @@ public class SnooView extends LinearLayout {
     public void setBlocks(List<RedditBlock> blocks) {
         removeAllViews();
         Context context = getContext();
-        for (RedditBlock block : blocks) {
+        for (int i = 0; i < blocks.size(); i++) {
+            RedditBlock block = blocks.get(i);
             switch (block.getBlockType()) {
                 case TEXT:
                     Spannable text = ((TextBlock) block).getText();
@@ -79,6 +96,13 @@ public class SnooView extends LinearLayout {
                     TextView textView = new TextView(context);
                     textView.setText(text);
                     textView.setMovementMethod(LinkMovementMethod.getInstance());
+                    if (i == 0) {
+                        textView.setPadding(0, 0, 0, 32);
+                    } else if (i == blocks.size() - 1) {
+                        textView.setPadding(0, 32, 0, 0);
+                    } else {
+                        textView.setPadding(0, 32, 0, 32);
+                    }
                     addView(textView);
                     break;
                 case HR:
@@ -118,7 +142,7 @@ public class SnooView extends LinearLayout {
         for (String headerItem : headerItems) {
             TextView headerItemView = new TextView(context);
             headerItemView.setTypeface(Typeface.DEFAULT_BOLD);
-            headerItemView.setPadding(0, 5, 32, 5);
+            headerItemView.setPadding(0, 0, 32, 5);
             headerItemView.setText(headerItem);
             headerRow.addView(headerItemView);
         }
@@ -130,6 +154,7 @@ public class SnooView extends LinearLayout {
                 TextView bodyItemView = new TextView(context);
                 bodyItemView.setPadding(0, 0, 32, 5);
                 bodyItemView.setText(tableItem);
+                bodyItemView.setGravity(Gravity.RIGHT);
                 bodyRow.addView(bodyItemView);
             }
             table.addView(bodyRow);

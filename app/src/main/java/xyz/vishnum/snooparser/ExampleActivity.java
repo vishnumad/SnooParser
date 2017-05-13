@@ -23,7 +23,7 @@ public class ExampleActivity extends AppCompatActivity {
 
         // Override how the <strong> tag is handled
         // Replaces all bold text with blue colored text
-        parser.replaceHandler("strong", new ExampleStrongHandler());
+        // parser.replaceHandler("strong", new ExampleStrongHandler());
 
         // Parse and display the comment/self-text
         String exampleHtml = getCommentHtml();
