@@ -59,8 +59,10 @@ public class SnooParser {
      */
     public List<RedditBlock> getBlocks(String escapedHtml) {
         String unescapedHtml = Parser.unescapeEntities(escapedHtml, false);
-        unescapedHtml = unescapedHtml.replace("href=\"/u/", "href=\"http://www.reddit.com/u/")
-                .replace("href=\"/r/", "href=\"http://www.reddit.com/r/");
+        unescapedHtml = unescapedHtml
+                .replace("href=\"/u/", "href=\"http://www.reddit.com/u/")
+                .replace("href=\"/r/", "href=\"http://www.reddit.com/r/")
+                .replace("href=\"/message/", "href=\"http://www.reddit.com/message/");
         Document document = Jsoup.parseBodyFragment(unescapedHtml);
 
         String buffer = "";

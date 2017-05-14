@@ -37,25 +37,10 @@ import xyz.vishnum.snoohtmlparser.blocks.TextBlock;
 public class SnooView extends LinearLayout {
     private static final String TAG = SnooView.class.getSimpleName();
     private static final LayoutParams HR_PARAMS;
-    private static final LayoutParams TEXT_PARAMS_MIDDLE;
-    private static final LayoutParams TEXT_PARAMS_TOP;
-    private static final LayoutParams TEXT_PARAMS_BOTTOM;
 
     static {
         HR_PARAMS = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 4 /*px*/);
         HR_PARAMS.setMargins(0, 32, 0, 32);
-
-        TEXT_PARAMS_TOP = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        TEXT_PARAMS_TOP.setMargins(0, 0, 0, 32);
-
-        TEXT_PARAMS_BOTTOM = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        TEXT_PARAMS_BOTTOM.setMargins(0, 32, 0, 0);
-
-        TEXT_PARAMS_MIDDLE = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        TEXT_PARAMS_MIDDLE.setMargins(0, 32, 0, 32);
     }
 
     private OnUrlClickListener urlClickListener = null;
@@ -116,6 +101,7 @@ public class SnooView extends LinearLayout {
                     TextView codeView = new TextView(context);
                     codeView.setText(((CodeBlock) block).getText());
                     codeScrollView.addView(codeView);
+                    codeScrollView.setScrollbarFadingEnabled(false);
                     addView(codeScrollView);
                     break;
                 case TABLE:
@@ -125,6 +111,7 @@ public class SnooView extends LinearLayout {
                             formatTable(tableBlock.getHeaderRow(), tableBlock.getBodyRows(),
                                     context);
                     tableScrollView.addView(tableLayout);
+                    tableScrollView.setScrollbarFadingEnabled(false);
                     addView(tableScrollView);
                     break;
             }
@@ -191,7 +178,7 @@ public class SnooView extends LinearLayout {
             try {
                 context.startActivity(intent);
             } catch (ActivityNotFoundException e) {
-                Log.w("ClickableSpan", "Activity was not found for intent, " + intent.toString());
+                Log.e("ClickableSpan", "Activity was not found for intent, " + intent.toString());
             }
         }
     }
