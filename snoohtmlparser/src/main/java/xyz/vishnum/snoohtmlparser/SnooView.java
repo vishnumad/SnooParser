@@ -32,37 +32,48 @@ import xyz.vishnum.snoohtmlparser.blocks.TextBlock;
 /**
  * Author:  vishnu
  * Created: 5/5/17, 11:03 PM
- * Purpose:
+ * Purpose: Displays the reddit comment
  */
 
 public class SnooView extends LinearLayout {
     private static final String TAG = SnooView.class.getSimpleName();
-    private static final LayoutParams HR_PARAMS;
 
-    static {
-        HR_PARAMS = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 4 /*px*/);
-        HR_PARAMS.setMargins(0, 32, 0, 32);
-    }
-
+    private int blockPadding;
+    private int tableItemPadding;
+    private LayoutParams hrParams;
+    private int hrColor = Color.GRAY;
     private OnUrlClickListener urlClickListener = null;
 
     public SnooView(Context context) {
         super(context);
-        init();
+        init(context);
     }
 
     public SnooView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(context);
     }
 
     public SnooView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        init(context);
     }
 
-    private void init() {
+    private void init(Context c) {
         setOrientation(VERTICAL);
+        blockPadding = Utils.dipToPixels(c, 8);
+        tableItemPadding = Utils.dipToPixels(c, 16);
+        hrParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Utils.dipToPixels(c, 2));
+        hrParams.setMargins(0, blockPadding, 0, blockPadding);
+    }
+
+    /**
+     * Sets the background color of HR blocks
+     *
+     * @param color Color that will be used for HR blocks
+     */
+    public void setHrColor(int color) {
+        hrColor = color;
     }
 
     /**
@@ -84,26 +95,26 @@ public class SnooView extends LinearLayout {
                     textView.setMovementMethod(LinkMovementMethod.getInstance());
                     if (blocks.size() > 1) {
                         if (i == 0) {
-                            textView.setPadding(0, 0, 0, 32);
+                            textView.setPadding(0, 0, 0, blockPadding);
                         } else if (i == blocks.size() - 1) {
-                            textView.setPadding(0, 32, 0, 0);
+                            textView.setPadding(0, blockPadding, 0, 0);
                         } else {
-                            textView.setPadding(0, 32, 0, 32);
+                            textView.setPadding(0, blockPadding, 0, blockPadding);
                         }
                     }
                     addView(textView);
                     break;
                 case HR:
                     View horizontalRule = new View(context);
-                    horizontalRule.setLayoutParams(HR_PARAMS);
-                    horizontalRule.setBackgroundColor(Color.GRAY);
+                    horizontalRule.setLayoutParams(hrParams);
+                    horizontalRule.setBackgroundColor(hrColor);
                     addView(horizontalRule);
                     break;
                 case CODE:
                     HorizontalScrollView codeScrollView = new HorizontalScrollView(context);
                     TextView codeView = new TextView(context);
                     codeView.setText(((CodeBlock) block).getText());
-                    codeView.setPadding(0, 16, 0, 16);
+                    codeView.setPadding(0, blockPadding, 0, blockPadding);
                     codeScrollView.addView(codeView);
                     codeScrollView.setScrollbarFadingEnabled(false);
                     addView(codeScrollView);
@@ -113,7 +124,7 @@ public class SnooView extends LinearLayout {
                     TableBlock tBlock = (TableBlock) block;
                     TableLayout tableLayout =
                             formatTable(tBlock.getHeaderRow(), tBlock.getBodyRows(), context);
-                    tableLayout.setPadding(0, 16, 0, 16);
+                    tableLayout.setPadding(0, blockPadding, 0, blockPadding);
                     tableScrollView.addView(tableLayout);
                     tableScrollView.setScrollbarFadingEnabled(false);
                     addView(tableScrollView);
@@ -134,7 +145,7 @@ public class SnooView extends LinearLayout {
         for (TableItem headerItem : headerItems) {
             TextView headerItemView = new TextView(context);
             headerItemView.setTypeface(Typeface.DEFAULT_BOLD);
-            headerItemView.setPadding(0, 0, 32, 5);
+            headerItemView.setPadding(0, 0, tableItemPadding, 5);
 
             headerItemView.setText(headerItem.text);
             headerItemView.setGravity(getTableItemGravity(headerItem.alignment));
@@ -147,7 +158,7 @@ public class SnooView extends LinearLayout {
             TableRow bodyRow = new TableRow(context);
             for (TableItem tableItem : tableRow) {
                 TextView bodyItemView = new TextView(context);
-                bodyItemView.setPadding(0, 0, 32, 5);
+                bodyItemView.setPadding(0, 0, tableItemPadding, 5);
 
                 bodyItemView.setText(tableItem.text);
                 bodyItemView.setGravity(getTableItemGravity(tableItem.alignment));

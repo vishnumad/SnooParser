@@ -28,7 +28,7 @@ import xyz.vishnum.snoohtmlparser.handlers.StrikethroughHandler;
 /**
  * Author:  vishnu
  * Created: 5/5/17, 10:27 PM
- * Purpose:
+ * Purpose: Parses comment html to be displayed in SnooView
  */
 
 public class SnooParser {
@@ -37,6 +37,7 @@ public class SnooParser {
 
     public SnooParser() {
         spanner = new HtmlSpanner();
+        spanner.setStripExtraWhiteSpace(true);
         // Unregister incorrectly formatted handlers
         unregisterHandlers();
         // Register custom handlers for Reddit formatting
@@ -55,12 +56,21 @@ public class SnooParser {
     }
 
     /**
+     * @param removeExtraWhitespace Boolean value that determines whether to remove extra
+     * whitespace
+     */
+    public void setRemoveExtraWhitespace(boolean removeExtraWhitespace) {
+        spanner.setStripExtraWhiteSpace(removeExtraWhitespace);
+    }
+
+    /**
      * @param escapedHtml The body HTML from a Reddit comment or self-text
      * @return Returns a list of RedditBlock items that can be parsed and put into views
      */
     public List<RedditBlock> getBlocks(String escapedHtml) {
         String unescapedHtml = Parser.unescapeEntities(escapedHtml, false);
-        unescapedHtml = unescapedHtml.replace("href=\"/u/", "href=\"http://www.reddit.com/u/")
+        unescapedHtml = unescapedHtml
+                .replace("href=\"/u/", "href=\"http://www.reddit.com/u/")
                 .replace("href=\"/r/", "href=\"http://www.reddit.com/r/")
                 .replace("href=\"/message/", "href=\"http://www.reddit.com/message/");
         Document document = Jsoup.parseBodyFragment(unescapedHtml);
@@ -76,7 +86,7 @@ public class SnooParser {
                 if (!buffer.isEmpty()) blocks.add(new TextBlock(parse(buffer)));
                 buffer = "";
                 // Add codeblock to blocks
-                blocks.add(new CodeBlock(parse(child.outerHtml(), true)));
+                blocks.add(new CodeBlock(parse(child.outerHtml())));
             } else if (child.tagName().equalsIgnoreCase("table")) {
                 // Ran into table
                 // Add buffer to blocks
@@ -109,15 +119,6 @@ public class SnooParser {
         return (Spannable) spanned.subSequence(0, spanned.length() - 2);
     }
 
-    private Spannable parse(String bufferHtml, boolean removeWhitespace) {
-        if (removeWhitespace) {
-            Spanned spanned = spanner.fromHtml(bufferHtml);
-            return (Spannable) spanned.subSequence(0, spanned.length() - 3);
-        } else {
-            return parse(bufferHtml);
-        }
-    }
-
     private TableBlock formatTableBlock(Element table) {
         Elements tableRows = table.getElementsByTag("tr");
         Elements headerItems = table.getElementsByTag("th");
@@ -137,7 +138,7 @@ public class SnooParser {
                     TableItem.Align alignment =
                             getTableItemAlignment(tableRow.child(column).attr("align"));
                     tRow.add(new TableItem(alignment,
-                            spanner.fromHtml(tableRow.child(column).html())));
+                                           spanner.fromHtml(tableRow.child(column).html())));
                 }
                 bodyRows.add(tRow);
             }

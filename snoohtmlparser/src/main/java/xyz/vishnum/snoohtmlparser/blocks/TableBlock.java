@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Author:  vishnu
  * Created: 5/5/17, 10:31 PM
- * Purpose:
+ * Purpose: Table block
  */
 
 public class TableBlock extends RedditBlock {
