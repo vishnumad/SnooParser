@@ -26,6 +26,7 @@ import java.util.List;
 import xyz.vishnum.snoohtmlparser.blocks.CodeBlock;
 import xyz.vishnum.snoohtmlparser.blocks.RedditBlock;
 import xyz.vishnum.snoohtmlparser.blocks.TableBlock;
+import xyz.vishnum.snoohtmlparser.blocks.TableItem;
 import xyz.vishnum.snoohtmlparser.blocks.TextBlock;
 
 /**
@@ -100,16 +101,17 @@ public class SnooView extends LinearLayout {
                     HorizontalScrollView codeScrollView = new HorizontalScrollView(context);
                     TextView codeView = new TextView(context);
                     codeView.setText(((CodeBlock) block).getText());
+                    codeView.setPadding(0, 16, 0, 16);
                     codeScrollView.addView(codeView);
                     codeScrollView.setScrollbarFadingEnabled(false);
                     addView(codeScrollView);
                     break;
                 case TABLE:
                     HorizontalScrollView tableScrollView = new HorizontalScrollView(context);
-                    TableBlock tableBlock = (TableBlock) block;
+                    TableBlock tBlock = (TableBlock) block;
                     TableLayout tableLayout =
-                            formatTable(tableBlock.getHeaderRow(), tableBlock.getBodyRows(),
-                                    context);
+                            formatTable(tBlock.getHeaderRow(), tBlock.getBodyRows(), context);
+                    tableLayout.setPadding(0, 16, 0, 16);
                     tableScrollView.addView(tableLayout);
                     tableScrollView.setScrollbarFadingEnabled(false);
                     addView(tableScrollView);
@@ -122,31 +124,50 @@ public class SnooView extends LinearLayout {
         this.urlClickListener = urlClickListener;
     }
 
-    private TableLayout formatTable(String[] headerItems, String[][] bodyRows, Context context) {
+    private TableLayout formatTable(List<TableItem> headerItems, List<List<TableItem>> bodyRows,
+            Context context) {
         TableLayout table = new TableLayout(context);
         // Add header items
         TableRow headerRow = new TableRow(context);
-        for (String headerItem : headerItems) {
+        for (TableItem headerItem : headerItems) {
             TextView headerItemView = new TextView(context);
             headerItemView.setTypeface(Typeface.DEFAULT_BOLD);
             headerItemView.setPadding(0, 0, 32, 5);
-            headerItemView.setText(headerItem);
+
+            headerItemView.setText(headerItem.text);
+            headerItemView.setGravity(getTableItemGravity(headerItem.alignment));
+
             headerRow.addView(headerItemView);
         }
         table.addView(headerRow);
         // Add table body items
-        for (String[] tableRow : bodyRows) {
+        for (List<TableItem> tableRow : bodyRows) {
             TableRow bodyRow = new TableRow(context);
-            for (String tableItem : tableRow) {
+            for (TableItem tableItem : tableRow) {
                 TextView bodyItemView = new TextView(context);
                 bodyItemView.setPadding(0, 0, 32, 5);
-                bodyItemView.setText(tableItem);
-                bodyItemView.setGravity(Gravity.RIGHT);
+
+                bodyItemView.setText(tableItem.text);
+                bodyItemView.setGravity(getTableItemGravity(tableItem.alignment));
+                bodyItemView.setMovementMethod(LinkMovementMethod.getInstance());
+
                 bodyRow.addView(bodyItemView);
             }
             table.addView(bodyRow);
         }
         return table;
+    }
+
+    private int getTableItemGravity(TableItem.Align alignment) {
+        switch (alignment) {
+            case LEFT:
+                return Gravity.LEFT;
+            case RIGHT:
+                return Gravity.RIGHT;
+            case CENTER:
+                return Gravity.CENTER;
+        }
+        return Gravity.LEFT;
     }
 
     private void formatUrlSpans(Spannable spannable) {

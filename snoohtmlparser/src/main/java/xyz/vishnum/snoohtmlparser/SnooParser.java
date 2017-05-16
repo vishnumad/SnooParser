@@ -18,6 +18,7 @@ import xyz.vishnum.snoohtmlparser.blocks.CodeBlock;
 import xyz.vishnum.snoohtmlparser.blocks.HrBlock;
 import xyz.vishnum.snoohtmlparser.blocks.RedditBlock;
 import xyz.vishnum.snoohtmlparser.blocks.TableBlock;
+import xyz.vishnum.snoohtmlparser.blocks.TableItem;
 import xyz.vishnum.snoohtmlparser.blocks.TextBlock;
 import xyz.vishnum.snoohtmlparser.handlers.BlockquoteHandler;
 import xyz.vishnum.snoohtmlparser.handlers.CodeHandler;
@@ -59,8 +60,7 @@ public class SnooParser {
      */
     public List<RedditBlock> getBlocks(String escapedHtml) {
         String unescapedHtml = Parser.unescapeEntities(escapedHtml, false);
-        unescapedHtml = unescapedHtml
-                .replace("href=\"/u/", "href=\"http://www.reddit.com/u/")
+        unescapedHtml = unescapedHtml.replace("href=\"/u/", "href=\"http://www.reddit.com/u/")
                 .replace("href=\"/r/", "href=\"http://www.reddit.com/r/")
                 .replace("href=\"/message/", "href=\"http://www.reddit.com/message/");
         Document document = Jsoup.parseBodyFragment(unescapedHtml);
@@ -121,22 +121,41 @@ public class SnooParser {
     private TableBlock formatTableBlock(Element table) {
         Elements tableRows = table.getElementsByTag("tr");
         Elements headerItems = table.getElementsByTag("th");
-
-        String[] headerRow = new String[headerItems.size()];
-        for (int col = 0; col < headerItems.size(); col++) {
-            headerRow[col] = headerItems.get(col).text();
+        // Header
+        List<TableItem> headerRow = new ArrayList<>(headerItems.size());
+        for (Element headerItem : headerItems) {
+            TableItem.Align alignment = getTableItemAlignment(headerItem.attr("align"));
+            headerRow.add(new TableItem(alignment, spanner.fromHtml(headerItem.html())));
         }
-
-        String[][] tableBody = new String[tableRows.size() - 1][headerItems.size()];
-        for (int row = 1; row < tableRows.size(); row++) {
+        // Table body
+        List<List<TableItem>> bodyRows = new ArrayList<>();
+        for (int row = 1; row < tableRows.size(); row++) { // skip first row
             Element tableRow = tableRows.get(row);
             if (tableRow.child(0).tagName().equals("td")) {
+                List<TableItem> tRow = new ArrayList<>();
                 for (int column = 0; column < tableRow.children().size(); column++) {
-                    tableBody[row - 1][column] = tableRow.child(column).text();
+                    TableItem.Align alignment =
+                            getTableItemAlignment(tableRow.child(column).attr("align"));
+                    tRow.add(new TableItem(alignment,
+                            spanner.fromHtml(tableRow.child(column).html())));
                 }
+                bodyRows.add(tRow);
             }
         }
-        return new TableBlock(headerRow, tableBody);
+        return new TableBlock(headerRow, bodyRows);
+    }
+
+    private TableItem.Align getTableItemAlignment(String attr) {
+        if (attr == null || attr.isEmpty()) {
+            return TableItem.Align.LEFT;
+        } else if (attr.equalsIgnoreCase("left")) {
+            return TableItem.Align.LEFT;
+        } else if (attr.equalsIgnoreCase("right")) {
+            return TableItem.Align.RIGHT;
+        } else if (attr.equalsIgnoreCase("center")) {
+            return TableItem.Align.CENTER;
+        }
+        return TableItem.Align.LEFT;
     }
 
     private void registerNewHandlers() {

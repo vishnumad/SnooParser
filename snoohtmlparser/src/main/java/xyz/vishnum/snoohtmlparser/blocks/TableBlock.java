@@ -1,5 +1,7 @@
 package xyz.vishnum.snoohtmlparser.blocks;
 
+import java.util.List;
+
 /**
  * Author:  vishnu
  * Created: 5/5/17, 10:31 PM
@@ -8,20 +10,20 @@ package xyz.vishnum.snoohtmlparser.blocks;
 
 public class TableBlock extends RedditBlock {
 
-    private String[] headerRow;
-    private String[][] bodyRows;
+    private List<TableItem> headerRow;
+    private List<List<TableItem>> bodyRows;
 
-    public TableBlock(String[] headerRow, String[][] bodyRows) {
+    public TableBlock(List<TableItem> headerRow, List<List<TableItem>> bodyRows) {
         super(Type.TABLE);
         this.headerRow = headerRow;
         this.bodyRows = bodyRows;
     }
 
-    public String[] getHeaderRow() {
+    public List<TableItem> getHeaderRow() {
         return headerRow;
     }
 
-    public String[][] getBodyRows() {
+    public List<List<TableItem>> getBodyRows() {
         return bodyRows;
     }
 }
