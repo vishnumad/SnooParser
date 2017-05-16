@@ -82,12 +82,14 @@ public class SnooView extends LinearLayout {
                     TextView textView = new TextView(context);
                     textView.setText(text);
                     textView.setMovementMethod(LinkMovementMethod.getInstance());
-                    if (i == 0 && blocks.size() > 1) {
-                        textView.setPadding(0, 0, 0, 32);
-                    } else if (i == blocks.size() - 1) {
-                        textView.setPadding(0, 32, 0, 0);
-                    } else {
-                        textView.setPadding(0, 32, 0, 32);
+                    if (blocks.size() > 1) {
+                        if (i == 0) {
+                            textView.setPadding(0, 0, 0, 32);
+                        } else if (i == blocks.size() - 1) {
+                            textView.setPadding(0, 32, 0, 0);
+                        } else {
+                            textView.setPadding(0, 32, 0, 32);
+                        }
                     }
                     addView(textView);
                     break;
